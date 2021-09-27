@@ -7,6 +7,8 @@ The structure of generated names will be similar to real English names <br>
 
 A random probability distribution is added to name generation phase to generate different names each time. <br>
 
+Full code for this project is [here](https://github.com/yigitatesh/artificial_name_generator/blob/main/full_code/english_name_generator.ipynb).
+
 ## Data
 Names dataset that consists of 5,163 first names is used ([Link](https://github.com/smashew/NameDatabases/blob/master/NamesDatabases/first%20names/us.txt) for the dataset). <br>
 85% of the data is used as training data and 15% of the data is used as validation data to prevent overfitting real names. <br>
