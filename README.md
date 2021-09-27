@@ -8,8 +8,8 @@ The structure of generated names will be similar to real English names <br>
 A random probability distribution is added to name generation phase to generate different names each time. <br>
 
 ## Data
-Names dataset that consists of 5163 first names is used ([Link](https://github.com/smashew/NameDatabases/blob/master/NamesDatabases/first%20names/us.txt) for the dataset).
-
+Names dataset that consists of 5,163 first names is used ([Link](https://github.com/smashew/NameDatabases/blob/master/NamesDatabases/first%20names/us.txt) for the dataset). <br>
+85% of the data is used as training data and 15% of the data is used as validation data to prevent overfitting real names. <br>
 
 ## Model
 An **LSTM** model is used to learn and generate names. <br>
