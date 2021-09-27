@@ -8,7 +8,7 @@ The structure of generated names will be similar to real English names <br>
 A random probability distribution is added to name generation phase to generate different names each time. <br>
 
 ## Data
-Names dataset that consists of 5163 first names is used (![Link](https://github.com/smashew/NameDatabases/blob/master/NamesDatabases/first%20names/us.txt) for the dataset).
+Names dataset that consists of 5163 first names is used ([Link](https://github.com/smashew/NameDatabases/blob/master/NamesDatabases/first%20names/us.txt) for the dataset).
 
 
 ## Model
