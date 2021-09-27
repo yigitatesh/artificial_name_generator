@@ -1,4 +1,4 @@
-# artificial_name_generator
+# Artificial Name Generator
 Artificial intelligence based English name generator <br>
 
 ## Description
