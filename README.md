@@ -29,3 +29,23 @@ After generating names, you can download these names in txt format.
 
 ## Examples
 
+Some generated names:
+* Bricki
+* Xelia
+* Ephari
+* Blannick
+* Sosa
+* Roelyn
+* Ruph
+* Doylee
+* Raxonda
+* Morlie
+* Lyvil
+* Roshal
+
+Generated names starting with "ar":
+* Ardretta
+* Artha
+* Armare
+* Arbella
+* Argelinda
