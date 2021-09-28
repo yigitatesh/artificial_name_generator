@@ -52,7 +52,6 @@ def name_to_seq(name):
 
 def seq_to_name(seq):
     return "".join([index_to_char[i] for i in seq])
-    
 
 ### Load the inference model
 
@@ -216,18 +215,17 @@ def predict():
     # generate names
     generated_names = generate_artificial_names(seed=seed, num_names=num_names)
     generated_names = [name.capitalize() for name in generated_names]
-
-    # save generated names in txt format
-    if not os.path.exists("tmp"):
-        os.makedirs("tmp")
-    with open(os.path.join("tmp", "temp.txt"), "wb") as f:
-        f.write("\n".join(generated_names).encode("utf-8"))
+    app.config["generated_names"] = generated_names.copy()
 
     return render_template('index.html', generated_names=generated_names)
 
 @app.route('/download')
 def download_names():
     """Downloads generated names in txt format"""
+    if not os.path.exists("tmp"):
+        os.makedirs("tmp")
+    with open(os.path.join("tmp", "temp.txt"), "wb") as f:
+        f.write("\n".join(app.config["generated_names"]).encode("utf-8"))
     f = open(os.path.join("tmp", "temp.txt"), "rb")
     return send_file(f, as_attachment=True, attachment_filename="generated_names.txt")
 
