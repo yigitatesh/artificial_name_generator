@@ -17,7 +17,7 @@ Names dataset that consists of 5,163 first names is used ([Link](https://github.
 An **LSTM** model is used to learn and generate names. <br>
 
 ## Usage
-Go to [app link](https://unseen-turkish-name-generator.herokuapp.com/) to open this app. <br>
+Go to [app link](https://artificial-name-generator.herokuapp.com/) to open this app. <br>
 
 1. Type initial characters for the name(s) to be generated. (You can leave it empty to not indicate any initial character)
 2. Type the number of names to be generated. (You can leave it empty to generate just one name)
