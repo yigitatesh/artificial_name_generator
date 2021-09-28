@@ -247,7 +247,8 @@ def download_names():
     with open(os.path.join("tmp", filename), "wb") as f:
         f.write("\n".join(app.config["generated_names"]).encode("utf-8"))
     f = open(os.path.join("tmp", filename), "rb")
-    resp = send_file(f, as_attachment=True, attachment_filename="generated_names.txt")
+    resp = send_file(f, as_attachment=True, attachment_filename="generated_names.txt",
+                        cache_timeout=0)
     file_remover.cleanup_once_done(resp, "tmp")
     return resp
 
