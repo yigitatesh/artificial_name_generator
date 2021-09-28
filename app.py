@@ -16,6 +16,7 @@ os.environ["TF_FORCE_GPU_ALLOW_GROWTH"] = "true"
 # Create Flask app
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 
 ### Load Names Data
