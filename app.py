@@ -3,7 +3,7 @@ import numpy as np
 import tensorflow as tf
 from flask import Flask, request, jsonify, render_template, flash, send_file
 from tensorflow.keras.models import load_model
-import os, re
+import os, re, tempfile
 
 # Do not show unnecessary warning messages
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -52,7 +52,7 @@ def name_to_seq(name):
 
 def seq_to_name(seq):
     return "".join([index_to_char[i] for i in seq])
-
+    
 
 ### Load the inference model
 
@@ -218,16 +218,18 @@ def predict():
     generated_names = [name.capitalize() for name in generated_names]
 
     # save generated names in txt format
-    with open("temp.txt", "wb") as f:
-    	f.write("\n".join(generated_names).encode("utf-8"))
+    if not os.path.exists("tmp"):
+        os.makedirs("tmp")
+    with open(os.path.join("tmp", "temp.txt"), "wb") as f:
+        f.write("\n".join(generated_names).encode("utf-8"))
 
     return render_template('index.html', generated_names=generated_names)
 
 @app.route('/download')
 def download_names():
-	"""Downloads generated names in txt format"""
-	f = open("temp.txt", "rb")
-	return send_file(f, as_attachment=True, attachment_filename="generated_names.txt")
+    """Downloads generated names in txt format"""
+    f = open(os.path.join("tmp", "temp.txt"), "rb")
+    return send_file(f, as_attachment=True, attachment_filename="generated_names.txt")
 
 
 if __name__ == "__main__":
