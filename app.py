@@ -3,7 +3,9 @@ import numpy as np
 import tensorflow as tf
 from flask import Flask, request, jsonify, render_template, flash, send_file
 from tensorflow.keras.models import load_model
-import os, re, tempfile
+import os, re
+import shutil, tempfile, weakref
+
 
 # Do not show unnecessary warning messages
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -170,6 +172,22 @@ def is_seed_valid(seed):
             return False
     return True
 
+# Removing temporary file after the download
+class FileRemover(object):
+    def __init__(self):
+        self.weak_references = dict()  # weak_ref -> filepath to remove
+
+    def cleanup_once_done(self, response, filepath):
+        wr = weakref.ref(response, self._do_cleanup)
+        self.weak_references[wr] = filepath
+
+    def _do_cleanup(self, wr):
+        filepath = self.weak_references[wr]
+        print('Deleting %s' % filepath)
+        shutil.rmtree(filepath, ignore_errors=True)
+
+file_remover = FileRemover()
+
 # dummy prediction to initialize tensorflow
 # model's first prediction will be so slow without dummy prediction
 generate_names("aaaaaaaaaaaa")
@@ -225,11 +243,13 @@ def download_names():
     if not os.path.exists("tmp"):
         os.makedirs("tmp")
 
-    filename = str(np.random.randint(0, 1e6)) + ".txt"
+    filename = "temp.txt"
     with open(os.path.join("tmp", filename), "wb") as f:
         f.write("\n".join(app.config["generated_names"]).encode("utf-8"))
     f = open(os.path.join("tmp", filename), "rb")
-    return send_file(f, as_attachment=True, attachment_filename="generated_names.txt")
+    resp = send_file(f, as_attachment=True, attachment_filename="generated_names.txt")
+    file_remover.cleanup_once_done(resp, "tmp")
+    return resp
 
 
 if __name__ == "__main__":
