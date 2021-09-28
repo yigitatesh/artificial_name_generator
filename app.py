@@ -224,9 +224,11 @@ def download_names():
     """Downloads generated names in txt format"""
     if not os.path.exists("tmp"):
         os.makedirs("tmp")
-    with open(os.path.join("tmp", "temp.txt"), "wb") as f:
+
+    filename = str(np.random.randint(0, 1e6)) + ".txt"
+    with open(os.path.join("tmp", filename), "wb") as f:
         f.write("\n".join(app.config["generated_names"]).encode("utf-8"))
-    f = open(os.path.join("tmp", "temp.txt"), "rb")
+    f = open(os.path.join("tmp", filename), "rb")
     return send_file(f, as_attachment=True, attachment_filename="generated_names.txt")
 
 
