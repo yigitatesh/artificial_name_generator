@@ -227,7 +227,7 @@ def predict():
 def download_names():
 	"""Downloads generated names in txt format"""
 	f = open("temp.txt", "rb")
-	return send_file(f, as_attachment=True, download_name="generated_names.txt")
+	return send_file(f, as_attachment=True, attachment_filename="generated_names.txt")
 
 
 if __name__ == "__main__":
