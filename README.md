@@ -18,13 +18,22 @@ Names dataset that consists of 5,163 first names is used ([Link](https://github.
 ## Model
 An **LSTM** model is used to learn and generate names. <br>
 
+### Trained Model
+This is the model that is trained on the data and learned the structure of names. <br>
+
 Structure of Trained Model: <br>
-![model summary](https://raw.githubusercontent.com/yigitatesh/unseen_turkish_name_generator/main/data/model_structure.PNG)
+<img src="https://raw.githubusercontent.com/yigitatesh/artificial_name_generator/main/model/trained_model.png" alt="plot of trained model" width="600"/>
 
 Embedding layer is used to extract information of letters. <br>
 LSTM layer is used to extract sequential and local structures of English names.
 
+### Inference Model
+This is the model that generates artificial names character by character in a loop. <br>
+
 Structure of Inference Model: <br>
+![plot of inference model](https://raw.githubusercontent.com/yigitatesh/artificial_name_generator/main/model/inference_model.png)
+
+In the plot, we can see 3 input layers. "input_1" layer is current character and other two input layers are "c" and "h" states of LSTM units. <br>
 
 ## Usage
 Go to [app link](https://artificial-name-generator.herokuapp.com/) to open this app. <br>
