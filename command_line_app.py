@@ -163,6 +163,9 @@ def is_real_name(name):
 
 def is_seed_valid(seed):
     """Checks whether a given seed is valid or not"""
+    if seed == "0":
+        return True
+
     for ch in seed:
         if not ch in all_chars_set:
             return False
@@ -176,14 +179,15 @@ def get_seed_from_user():
     seed = "" #default value
 
     # user info
-    print("\nType initial characters of name(s) to be generated.")
-    print("(You can directly enter without writing any character)")
+    print("\nType initial characters of name(s) to generate.")
+    print("(You can directly enter to not indicate any initial character)")
+    print("(Type \"0\" without quotes to exit)")
 
     while not valid:
         seed = input("Your input: ")
+        seed = seed.lower().strip()
 
         if is_seed_valid(seed):
-            seed = seed.lower().strip()
             valid = True
         else:
             print("\nPlease type alphabetical character(s).\n")
@@ -196,7 +200,7 @@ def get_num_names_from_user():
     num_names = 1 #default value
 
     # user info
-    print("\nType number of Turkish names to be generated.")
+    print("\nType number of names to generate.")
     print("(You can directly Enter to generate 1 name)")
 
     while not valid:
@@ -214,51 +218,36 @@ def get_num_names_from_user():
 
     return num_names
 
-# menu function
-def menu():
-    print("\nPress Enter to generate unseen turkish name(s).")
-    print("Type q and press Enter to exit.")
 
 ## main function
 def main():
     # dummy generation for initialization
     generate_artificial_names()
 
-    print("\nWelcome to the Turkish Name Generator!")
+    print("\nWelcome to the English Name Generator!")
     print("These created names will NOT be REAL NAMES!")
     print("They are being created by an Artificial Intelligence.")
-    
+
     run = True
     while run:
-        # print menu
-        menu()
+        ## generate names
+        # get initial characters
+        seed = get_seed_from_user()
 
-        # get input
-        choice = input("\nYour input: ")
-
-        # process choice
-        if choice.strip() == "":
-            ## generate names
-            # get initial characters
-            seed = get_seed_from_user()
-
-            # get number of names
-            num_names = get_num_names_from_user()
-
-            # generate and print names
-            print("\nYour Turkish Names:\n")
-
-            generated_names = generate_artificial_names(seed=seed, num_names=num_names)
-            for i, name in enumerate(generated_names):
-                print("{}: {}".format(i+1, name))
-
-        elif choice.lower().strip() == "q":
-            # print goodby message and exit
+        # exit the generator
+        if seed == "0":
             print("\nSee you again")
-            run = False
+            break
 
-        else:
-            print("\nNot a valid choice!")
+        # get number of names
+        num_names = get_num_names_from_user()
+
+        # generate and print names
+        print("\nYour English Names:\n")
+
+        generated_names = generate_artificial_names(seed=seed, num_names=num_names)
+        for i, name in enumerate(generated_names):
+            print("{}: {}".format(i+1, name))
 
 
 # START THE GENERATOR APP
